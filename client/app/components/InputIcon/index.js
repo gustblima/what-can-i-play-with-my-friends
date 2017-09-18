@@ -1,0 +1,28 @@
+import React from 'react';
+
+import Input from './Input';
+import Wrapper from './Wrapper';
+
+
+function InputIcon(props) {
+  const { icon, ...newProps } = props
+  const Icon = icon
+  return (
+    <Wrapper>
+        {icon}
+        <Input
+            {...newProps}
+            />
+      
+    </Wrapper>
+  );
+}
+
+InputIcon.propTypes = {
+  type: React.PropTypes.any,
+  placeholder: React.PropTypes.any,
+  value: React.PropTypes.any,
+  onChange: React.PropTypes.any,
+};
+
+export default InputIcon;

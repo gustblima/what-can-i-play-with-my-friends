@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ListItem from '../ListItem/Wrapper';
 const Wrapper = styled.div`
   padding-right: 1rem;
   width: 100%;

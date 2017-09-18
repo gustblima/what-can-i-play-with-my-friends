@@ -71,7 +71,7 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
-const render = (messages) => {
+const render = () => {
   ReactDOM.render(
     <Provider store={store}>
         <Router

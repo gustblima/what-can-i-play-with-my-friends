@@ -23,6 +23,7 @@ InputIcon.propTypes = {
   placeholder: React.PropTypes.any,
   value: React.PropTypes.any,
   onChange: React.PropTypes.any,
+  icon: React.PropTypes.any,
 };
 
 export default InputIcon;

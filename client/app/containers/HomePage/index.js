@@ -6,74 +6,68 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import Modal from 'react-modal';
 import { createStructuredSelector } from 'reselect';
 import { List, Map } from 'immutable';
-import Img from './Img';
-
-import { 
+import MdAccountBox from 'react-icons/lib/md/account-box';
+import GamesList from 'components/GamesList';
+import FriendsList from 'components/FriendsList';
+import InputIcon from 'components/InputIcon';
+import TagsList from 'components/TagsList';
+import Button from 'components/Button';
+import LoadingIndicator from 'components/LoadingIndicator';
+import {
   makeSelectLibraries,
-  makeSelectSteamIds, 
-  makeSelectModalOpen, 
-  makeSelectGameInfo, 
+  makeSelectSteamIds,
+  makeSelectModalOpen,
+  makeSelectGameInfo,
   makeSelectLoading,
   makeSelectFriends,
   makeSelectError,
-  makeSelectUser
+  makeSelectUser,
 } from 'containers/HomePage/selectors';
 
-import { 
-  changeSteamId, 
-  loadLibraries, 
-  loadGameInfo, 
-  hideModal, 
-  loadUserFriends, 
+import Img from './Img';
+import {
+  changeSteamId,
+  loadLibraries,
+  loadGameInfo,
+  hideModal,
+  loadUserFriends,
   changeUserSteamId,
-  toggleFriend
+  toggleFriend,
 } from './actions';
-
-import GamesList from 'components/GamesList';
-import FriendsList from 'components/FriendsList';
-import InputIcon  from 'components/InputIcon';
-import TagsList  from 'components/TagsList';
-import Button from 'components/Button';
-import Form  from './Form';
-import Modal from 'react-modal'
-import MdAccountBox from 'react-icons/lib/md/account-box';
-import LoadingIndicator from 'components/LoadingIndicator';
-
+import Form from './Form';
 const customModal = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    color                 : 'black'
-  }
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    color: 'black',
+  },
 };
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
- 
   render() {
-    const { error, libraries, modalOpen, closeModal, gameInfo, friends, loading, steamIds, user } = this.props;
+    const { error, libraries, modalOpen, onCloseModal, gameInfo, friends, loading, steamIds, user } = this.props;
     const gamesListProps = {
       loading: loading.get('library'),
       error,
       libraries,
-      onClick: this.props.onClickListItem
+      onClick: this.props.onClickListItem,
     };
 
     const friendsListProps = {
       loading: loading.get('friends'),
       error,
       friends,
-      onClick: this.props.onToggleFriend
+      onClick: this.props.onToggleFriend,
     };
-    const iconImage = user.get('avatar') ? <Img src={user.get('avatar')} /> :  <MdAccountBox/>;
+    const iconImage = user.get('avatar') ? <Img src={user.get('avatar')} /> : <MdAccountBox />;
     return (
       <article>
         <Helmet
@@ -84,14 +78,13 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         />
         <div>
           <section>
-            
             <Form onSubmit={this.props.loadUserFriends}>
-                <InputIcon 
-                  type="text"
-                  placeholder="Your Steam Id"
-                  icon={iconImage}
-                  onChange={(evt) => this.props.onChangeUserSteamId(evt)}
-                />
+              <InputIcon
+                type="text"
+                placeholder="Your Steam Id"
+                icon={iconImage}
+                onChange={(evt) => this.props.onChangeUserSteamId(evt)}
+              />
             </Form>
             {/* <Form onSubmit={this.props.onSubmitSteamIds}>
               {this.props.steamIds.map((steamId, idx) => (
@@ -104,15 +97,13 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
                   />
               ))}
             </Form> */}
-            {friends.size > 0 && 
+            {friends.size > 0 &&
             <h3>Select friends:</h3> }
             <FriendsList {...friendsListProps} />
-            
-            
-            {steamIds.size > 1 && 
-            <div style={{textAlign: 'center'}}>
-              <h6> {steamIds.size -1 }/10 friends selected </h6>
-              <Button  onClick={this.props.onSubmitSteamIds}>Search</Button>
+            {steamIds.size > 1 &&
+            <div style={{ textAlign: 'center' }}>
+              <h6> {steamIds.size - 1 }/10 friends selected </h6>
+              <Button onClick={this.props.onSubmitSteamIds}>Search</Button>
             </div>}
             <GamesList {...gamesListProps} />
           </section>
@@ -121,12 +112,11 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           isOpen={modalOpen}
           contentLabel="Modal"
           style={customModal}
-          onRequestClose={closeModal}>
-             { loading.get('modal') || gameInfo == false ? <LoadingIndicator /> :  <TagsList tags={gameInfo.get('specs')} />} 
+          onRequestClose={onCloseModal}
+        >
+          { loading.get('modal') || gameInfo === false ? <LoadingIndicator /> : <TagsList tags={gameInfo.get('specs')} />}
         </Modal>
       </article>
-
-      
     );
   }
 }
@@ -153,12 +143,14 @@ HomePage.propTypes = {
     React.PropTypes.instanceOf(List),
     React.PropTypes.bool,
   ]),
-  user : React.PropTypes.object,
+  user: React.PropTypes.object,
   onSubmitSteamIds: React.PropTypes.func,
-  onChangeSteamId: React.PropTypes.func,
+  modalOpen: React.PropTypes.bool,
   loadUserFriends: React.PropTypes.func,
   onChangeUserSteamId: React.PropTypes.func,
   onToggleFriend: React.PropTypes.func,
+  onClickListItem: React.PropTypes.func,
+  onCloseModal: React.propTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -166,12 +158,12 @@ export function mapDispatchToProps(dispatch) {
     onChangeSteamId: (evt, idx) => dispatch(changeSteamId(evt.target.value, idx)),
     onChangeUserSteamId: (evt) => dispatch(changeUserSteamId(evt.target.value)),
     onClickListItem: (evt, gameId) => dispatch(loadGameInfo(gameId)),
-    onToggleFriend: (userId, idx) => dispatch(toggleFriend (userId, idx)),
-    loadUserFriends : (evt) => {
+    onToggleFriend: (userId, idx) => dispatch(toggleFriend(userId, idx)),
+    loadUserFriends: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadUserFriends());
     },
-    closeModal: () => dispatch(hideModal()),
+    onCloseModal: () => dispatch(hideModal()),
     onSubmitSteamIds: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadLibraries());

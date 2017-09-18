@@ -9,9 +9,8 @@
  * case YOUR_ACTION_CONSTANT:
  *   return state.set('yourStateVariable', true);
  */
-import { Map, List, fromJS } from 'immutable';
+import { List, fromJS } from 'immutable';
 import {
-  ADD_STEAM_ID,
   LOAD_LIBRARIES,
   LOAD_LIBRARIES_SUCCESS,
   LOAD_LIBRARIES_ERROR,
@@ -23,8 +22,7 @@ import {
   LOAD_USER_FRIENDS_SUCCESS,
   CHANGE_USER_STEAM_ID,
   TOGGLE_FRIEND,
-  HIDE_MODAL
-  
+  HIDE_MODAL,
 } from './constants';
 
 // The initial state of the App
@@ -32,18 +30,18 @@ const initialState = fromJS({
   steamIds: List([]),
   libraries: false,
   gameInfo: false,
-  loading:{
+  loading: {
     modal: false,
     library: false,
     friends: false,
   },
   modalOpen: false,
-  user:{
-    id:false,
+  user: {
+    id: false,
     avatar: false,
-    item:false
+    item: false,
   },
-  friends:false,
+  friends: false,
   error: false,
 });
 
@@ -93,31 +91,29 @@ function homeReducer(state = initialState, action) {
       return state
         .set('friends', fromJS(action.friends))
         .setIn(['loading', 'friends'], false)
-        .update('steamIds', list => list.push(action.user.item))
+        .update('steamIds', (list) => list.push(action.user.item))
         .setIn(['user', 'avatar'], action.user.avatar)
-        .setIn(['user', 'item'],action.user.item )
+        .setIn(['user', 'item'], action.user.item);
     case CHANGE_USER_STEAM_ID:
       return state
         .setIn(['user', 'id'], action.userSteamId)
         .set('friends', false)
         .setIn(['user', 'avatar'], false)
         .set('steamIds', false);
-    case TOGGLE_FRIEND:
+    case TOGGLE_FRIEND: {
       let steamIds = state.get('steamIds');
-      if(steamIds.contains(action.userSteamId)){
+      if (steamIds.contains(action.userSteamId)) {
         steamIds = steamIds.filter((item) => (item !== action.userSteamId));
-      }else if (steamIds.size < 10){
+      } else if (steamIds.size < 10) {
         steamIds = steamIds.concat(action.userSteamId);
-      }
-      else{
+      } else {
         return state;
       }
       return state
         .set('steamIds', steamIds)
         .set('libraries', false)
-        .updateIn(['friends', action.idx, 'selected'], selected => !selected);
-        
-    
+        .updateIn(['friends', action.idx, 'selected'], (selected) => !selected);
+    }
     default:
       return state;
   }

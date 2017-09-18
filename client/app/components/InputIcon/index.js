@@ -1,19 +1,14 @@
 import React from 'react';
-
 import Input from './Input';
 import Wrapper from './Wrapper';
 
 
 function InputIcon(props) {
-  const { icon, ...newProps } = props
-  const Icon = icon
+  const { icon, ...newProps } = props;
   return (
     <Wrapper>
-        {icon}
-        <Input
-            {...newProps}
-            />
-      
+      {icon}
+      <Input {...newProps} />
     </Wrapper>
   );
 }

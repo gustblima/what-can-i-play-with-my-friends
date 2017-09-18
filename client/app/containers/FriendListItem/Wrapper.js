@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Name from './Name'
+import Name from './Name';
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   border-radius:5px;
   padding-left:5px;
 
-  ${props => props.selected && `
+  ${(props) => props.selected && `
     -webkit-box-shadow: 0px 0px 8px 0px rgba(180,200,250,1);
     -moz-box-shadow: 0px 0px 8px 0px rgba(180,200,250,1);
     box-shadow: 0px 0px 8px 0px rgba(180,200,250,1);
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
     z-index:1;
   `}
   
-  ${props => props.public && `
+  ${(props) => props.public && `
     &:hover {
       background-color:rgba(0,0,0,0.5);
       cursor:pointer;
@@ -31,12 +31,12 @@ const Wrapper = styled.div`
     color:'white';
   }
 
-${props => !props.public && `
+${(props) => !props.public && `
     background-color:rgba(100,0,0,0.2);
 `}
 
   ${Name}{
-    color:${props => props.selected ? 'white' : '#848484'};
+    color:${(props) => props.selected ? 'white' : '#848484'};
   }
   .private-profile{
     display: flex;

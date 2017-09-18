@@ -17,12 +17,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
 import 'sanitize.css/sanitize.css';
-
-// Import root app
-import App from 'containers/App';
-
-// Import selector for `syncHistoryWithStore`
 import { makeSelectLocationState } from 'containers/App/selectors';
+import App from 'containers/App';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-webpack-loader-syntax */
@@ -74,29 +70,20 @@ const rootRoute = {
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-        <Router
-          history={history}
-          routes={rootRoute}
-          render={
-            // Scroll to top when going to a new page, imitating default browser
-            // behaviour
-            applyRouterMiddleware(useScroll())
-          }
-        />
+      <Router
+        history={history}
+        routes={rootRoute}
+        render={
+          applyRouterMiddleware(useScroll())
+        }
+      />
     </Provider>,
     document.getElementById('app')
   );
 };
 
-// Hot reloadable translation json files
-
-
-// Chunked polyfill for browsers without Intl support
 render();
 
-// Install ServiceWorker and AppCache in the end since
-// it's not most important operation and if main code fails,
-// we do not want it installed
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }

@@ -12,42 +12,42 @@ import {
   LOAD_USER_FRIENDS,
   LOAD_USER_FRIENDS_SUCCESS,
   LOAD_USER_FRIENDS_ERROR,
-  TOGGLE_FRIEND
+  TOGGLE_FRIEND,
 
 } from './constants';
 
-export function toggleFriend(userSteamId, idx){
+export function toggleFriend(userSteamId, idx) {
   return {
-    type:TOGGLE_FRIEND,
+    type: TOGGLE_FRIEND,
     userSteamId,
-    idx
-  }
+    idx,
+  };
 }
 
-export function changeUserSteamId(userSteamId){
+export function changeUserSteamId(userSteamId) {
   return {
-    type:CHANGE_USER_STEAM_ID,
-    userSteamId
-  }
+    type: CHANGE_USER_STEAM_ID,
+    userSteamId,
+  };
 }
-export function loadUserFriends(){
+export function loadUserFriends() {
   return {
     type: LOAD_USER_FRIENDS,
   };
 }
 
-export function loadUserFriendsSuccess(user, friends){
+export function loadUserFriendsSuccess(user, friends) {
   return {
     type: LOAD_USER_FRIENDS_SUCCESS,
     friends,
-    user
+    user,
   };
 }
 
-export function loadUserFriendsError(err){
+export function loadUserFriendsError(error) {
   return {
     type: LOAD_USER_FRIENDS_ERROR,
-    error
+    error,
   };
 }
 
@@ -61,7 +61,7 @@ export function changeSteamId(steamId, idx) {
   return {
     type: ADD_STEAM_ID,
     steamId,
-    idx
+    idx,
   };
 }
 
@@ -88,20 +88,20 @@ export function libraryLoadingError(error) {
 export function loadGameInfo(gameId) {
   return {
     type: LOAD_GAME_INFO,
-    gameId
-  }
+    gameId,
+  };
 }
 
 export function loadGameInfoSuccess(gameInfo) {
   return {
     type: LOAD_GAME_INFO_SUCCESS,
-    gameInfo: gameInfo
-  }
+    gameInfo,
+  };
 }
 
 export function loadGameInfoError(error) {
   return {
     type: LOAD_GAME_INFO_ERROR,
-    error: error
-  }
+    error,
+  };
 }

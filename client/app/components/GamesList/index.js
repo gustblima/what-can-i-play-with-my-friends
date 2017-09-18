@@ -18,10 +18,10 @@ function GamesList({ loading, error, libraries, onClick }) {
   }
 
   if (libraries !== undefined && libraries !== false) {
-    if (libraries.size === 0){
+    if (libraries.size === 0) {
       return <h5>No games to play :(</h5>;
     }
-    return <List items={libraries} component={GameListItem} onClick={onClick}/>;
+    return <List items={libraries} component={GameListItem} onClick={onClick} />;
   }
 
   return null;

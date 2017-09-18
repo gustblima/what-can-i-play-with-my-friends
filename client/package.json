@@ -1,7 +1,7 @@
 {
   "name": "what-can-i-play-with-my-friends",
   "version": "0.0.1",
-  "homepage": "http://gustblima.github.io/what-can-i-play-with-my-friends",
+  "homepage": "http://gustblima.github.io/what-can-i-play-with-my-friends/",
   "description": "See what games you have in common with your friends",
   "engines": {
     "npm": ">=3",

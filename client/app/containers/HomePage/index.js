@@ -16,6 +16,7 @@ import FriendsList from 'components/FriendsList';
 import InputIcon from 'components/InputIcon';
 import TagsList from 'components/TagsList';
 import Button from 'components/Button';
+import Error from 'components/Error';
 import LoadingIndicator from 'components/LoadingIndicator';
 import {
   makeSelectLibraries,
@@ -85,6 +86,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
                 icon={iconImage}
                 onChange={(evt) => this.props.onChangeUserSteamId(evt)}
               />
+              {error && <Error>{error}</Error>}
             </Form>
             {/* <Form onSubmit={this.props.onSubmitSteamIds}>
               {this.props.steamIds.map((steamId, idx) => (

@@ -51,20 +51,15 @@ exports.getLibraries = (ids) => {
     })
 }
 
-
-
-
 exports.getAllFriendsList = (id) => {
     return axios.get(`http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=${config.STEAM_API_KEY}&steamid=${id}&relationship=friend`)
     .then((resp) => {
         if(resp.data.friendslist === undefined){
-            throw "Error";
+            return undefined;
         }
         return resp.data.friendslist.friends
     })
 }
-
-
 
 exports.getUsersInfo = (ids) => {
     let promises = []
@@ -85,7 +80,7 @@ exports.getUsersInfo = (ids) => {
                             avatar: item.avatarmedium,
                             personaname: item.personaname,
                             lastlogoff: item.lastlogoff,
-                            public: item.communityvisibilitystate  === 1 ? false : true 
+                            public: item.communityvisibilitystate === 1 || item.communityvisibilitystate === 2 ? false : true 
                         })
                     })
             })

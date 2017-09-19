@@ -99,7 +99,8 @@ function homeReducer(state = initialState, action) {
         .setIn(['user', 'id'], action.userSteamId)
         .set('friends', false)
         .setIn(['user', 'avatar'], false)
-        .set('steamIds', false);
+        .set('steamIds', false)
+        .set('error', false);
     case TOGGLE_FRIEND: {
       let steamIds = state.get('steamIds');
       if (steamIds.contains(action.userSteamId)) {

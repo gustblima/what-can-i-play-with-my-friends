@@ -41,7 +41,8 @@ export function* getUserFriends() {
     const data = yield call(request, url);
     yield put(loadUserFriendsSuccess(data.user, data.friends));
   } catch (err) {
-    yield put(loadUserFriendsError(err));
+    const errorObject = yield err.response.json();
+    yield put(loadUserFriendsError(errorObject.error));
   }
 }
 

@@ -22,4 +22,4 @@ app.use(function (req, res, next) {
 const routes =  require('./routes')
 routes(app)
 app.listen(port)
-console.log('Listening on: ' + port);
+console.log('Listen in: ' + port);

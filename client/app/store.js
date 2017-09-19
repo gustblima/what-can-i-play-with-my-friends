@@ -1,6 +1,3 @@
-/**
- * Create the store with asynchronously loaded reducers
- */
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import { fromJS } from 'immutable';
@@ -11,9 +8,6 @@ import createReducer from './reducers';
 const sagaMiddleware = createSagaMiddleware();
 
 export default function configureStore(initialState = {}, history) {
-  // Create the store with two middlewares
-  // 1. sagaMiddleware: Makes redux-sagas work
-  // 2. routerMiddleware: Syncs the location/URL path to the state
   const middlewares = [
     sagaMiddleware,
     routerMiddleware(history),

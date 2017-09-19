@@ -41,7 +41,7 @@
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages PUBLIC_URL=what-can-i-play-with-my-friends -d build"
   },
   "lint-staged": {
     "*.js": "lint:eslint"

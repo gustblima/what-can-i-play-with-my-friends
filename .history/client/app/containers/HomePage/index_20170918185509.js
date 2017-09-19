@@ -150,7 +150,7 @@ HomePage.propTypes = {
   onChangeUserSteamId: React.PropTypes.func,
   onToggleFriend: React.PropTypes.func,
   onClickListItem: React.PropTypes.func,
-  onCloseModal: React.PropTypes.func,
+  onCloseModal: React.propTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {

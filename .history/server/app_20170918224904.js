@@ -1,7 +1,7 @@
 const express = require('express'),
     app = express(),
     bodyParser = require('body-parser')
-    port = process.env.PORT || 8080;
+    port = process.env.PORT;
 
 
 
@@ -22,4 +22,4 @@ app.use(function (req, res, next) {
 const routes =  require('./routes')
 routes(app)
 app.listen(port)
-console.log('Listening on: ' + port);
+console.log('Listen in: ' + port);
